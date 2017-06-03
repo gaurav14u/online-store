@@ -15,4 +15,4 @@ I have used in memory database.
 
 ### Usage
 
-Go to http://localhost:8080/checkout/repo
+Go to http://localhost:8080/checkout.html
