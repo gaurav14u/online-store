@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="checkoutapp">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Online Retail Checkout</title>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../app/angular.js"></script>
+    <script src="../app/script.js"></script>
+</head>
+
+<body>
+    <div ng-controller="MainCtrl">
+
+        <table frame="box" rules="all">
+            <thead>
+
+
+                <tr>
+
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Tax (%)</th>
+                    <th>Total Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr></tr>
+                <tr ng-repeat="r in rows">
+                    <td>
+                        <select ng-model="r.code" ng-change="getProductDetails(r)" ng-options="p.code as p.name for p in product">
+                            <option value="">Select Product</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" style="width: 80px" ng-model="r.quantity" value="0" />
+                    </td>
+                    <td>
+                        <input type="text" style="width: 80px" disabled="disabled" ng-model="r.price" value="0" />
+                    </td>
+                    <td>
+                        <input type="text" style="width: 80px" disabled="disabled" ng-model="r.tax" value="0" />
+                    </td>
+                    
+                    <td>{{r.amount=(r.quantity*r.price)+((r.tax/100) *(r.quantity*r.price))| currency:"Rs."}}</td>
+
+                    <td>
+                        <div class="text-center">
+                            <button ng-click="addRow()">Add Row</button>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <h4><strong>{{total_tax() |currency:"Rs."}}</strong></h4>
+                    </td>
+                    <td>
+                        <h4>
+											<strong>{{total_amount() |currency:"Rs."}}</strong>
+										</h4>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</html>
